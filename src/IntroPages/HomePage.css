@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+
+/* Grouped skulls styling */
+.grouped-skulls-top,
+.grouped-skulls-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.grouped-skulls-top {
+  margin-bottom: 20px;
+}
+
+.grouped-skulls-bottom {
+  margin-top: 20px;
+}
+
+.grouped-skulls-image {
+  max-width: 80vw;
+  max-height: 15vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.8;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.skull-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skull-bg-image {
+  position: absolute;
+  max-width: 60vw;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  z-index: 1;
+  opacity: 0.6;
+  filter: brightness(0.8) contrast(0.9);
+}
+
+.skull-image {
+  max-width: 60vw;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+.mouth-svg {
+  position: absolute;
+  left: 50%;
+  bottom: 13%; /* Changed from 32% to 25% to move text down */
+  transform: translateX(-50%);
+  width: 80%; /* Increased from 60% */
+  height: 60%; /* Increased from 40% */
+  pointer-events: none;
+  z-index: 10;
+}
+
+.mouth-svg-text {
+  fill: #ff0000;
+  font-family: 'Rubik Wet Paint', cursive, 'Arial Black', sans-serif;
+  font-size: 4.3vw; /* Increased from 2.7vw */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(255,0,0,0.5), 0 0 20px rgba(255,0,0,0.3);
+  letter-spacing: 1px;
+  animation: textGlow 2s ease-in-out infinite alternate, flicker 3.5s infinite;
+  dominant-baseline: middle;
+  /* transform: scaleY(1); */
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(255,0,0,0.5), 0 0 20px rgba(255,0,0,0.3);
+  }
+  100% {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px rgba(255,0,0,0.8), 0 0 30px rgba(255,0,0,0.6), 0 0 40px rgba(255,0,0,0.4);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333; }
+  10% { opacity: 0.92; text-shadow: 0 0 14px #ff3333, 0 0 24px #ff0000; }
+  20% { opacity: 0.85; text-shadow: 0 0 8px #ff0000, 0 0 16px #ff3333; }
+  22% { opacity: 0.7; text-shadow: 0 0 4px #ff3333; }
+  24% { opacity: 0.95; text-shadow: 0 0 16px #ff0000, 0 0 28px #ff3333; }
+  30% { opacity: 0.88; text-shadow: 0 0 10px #ff3333, 0 0 20px #ff0000; }
+  35% { opacity: 0.8; text-shadow: 0 0 6px #ff0000; }
+  40% { opacity: 1; text-shadow: 0 0 18px #ff0000, 0 0 32px #ff3333; }
+  50% { opacity: 0.9; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333; }
+  60% { opacity: 0.85; text-shadow: 0 0 6px #ff3333; }
+  70% { opacity: 1; text-shadow: 0 0 20px #ff0000, 0 0 36px #ff3333; }
+  80% { opacity: 0.9; text-shadow: 0 0 10px #ff3333, 0 0 20px #ff0000; }
+  90% { opacity: 0.95; text-shadow: 0 0 16px #ff0000, 0 0 28px #ff3333; }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 960px) {
+  .skull-image {
+    max-width: 85vw;
+    max-height: 60vh;
+  }
+  .skull-bg-image {
+    max-width: 85vw;
+    max-height: 60vh;
+  }
+  .mouth-svg-text {
+    font-size: 4.5vw;
+  }
+  .grouped-skulls-image {
+    max-width: 90vw;
+    max-height: 12vh;
+  }
+}
+
+@media (max-width: 850px) {
+  .skull-image {
+    max-width: 95vw;
+    max-height: 50vh;
+  }
+  .skull-bg-image {
+    max-width: 95vw;
+    max-height: 50vh;
+  }
+  .mouth-svg-text {
+    font-size: 10vw;
+  }
+  .grouped-skulls-image {
+    max-width: 95vw;
+    max-height: 10vh;
+  }
+}
+
+/* Flashlight instructions */
+.flashlight-instructions {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ff0000;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family: 'Rubik Wet Paint', cursive, 'Arial Black', sans-serif;
+  font-size: 14px;
+  z-index: 1001;
+  border: 1px solid #ff0000;
+  text-shadow: 0 0 5px #ff0000;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+  }
+  100% {
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  }
+}
