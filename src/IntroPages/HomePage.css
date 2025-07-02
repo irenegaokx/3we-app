@@ -31,8 +31,8 @@
 }
 
 .right-stars-image {
-  max-width: 35vw;
-  max-height: 90vh;
+  max-width: 45vw;
+  max-height: 95vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -52,8 +52,8 @@
 }
 
 .left-stars-image {
-  max-width: 35vw;
-  max-height: 90vh;
+  max-width: 45vw;
+  max-height: 95vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -124,8 +124,8 @@
 
 .skull-bg-image {
   position: absolute;
-  max-width: 80vw;
-  max-height: 85vh;
+  max-width: 110vw; /* Changed from 80vw */
+  max-height: 110vh; /* Changed from 85vh */
   width: auto;
   height: auto;
   display: block;
