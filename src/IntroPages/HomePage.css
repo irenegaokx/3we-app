@@ -8,6 +8,8 @@
   justify-content: center;
   align-items: center;
   padding: 20px 0;
+  position: relative;
+  z-index: 5;
 }
 
 .grouped-skulls-top {
@@ -18,14 +20,99 @@
   margin-top: 20px;
 }
 
-.grouped-skulls-image {
-  max-width: 80vw;
-  max-height: 15vh;
+/* Right stars styling */
+.right-stars {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.right-stars-image {
+  max-width: 35vw;
+  max-height: 90vh;
   width: auto;
   height: auto;
   object-fit: contain;
   opacity: 0.8;
   filter: brightness(0.9) contrast(1.1);
+  animation: floatVertical 8s ease-in-out infinite, rotateGently 12s ease-in-out infinite;
+}
+
+/* Left stars styling */
+.left-stars {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.left-stars-image {
+  max-width: 35vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.8;
+  filter: brightness(0.9) contrast(1.1);
+  animation: floatVertical 8s ease-in-out infinite, rotateGently 12s ease-in-out infinite;
+}
+
+@keyframes floatVertical {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes rotateGently {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.grouped-skulls-image {
+  max-width: 95vw;
+  max-height: 20vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  filter: brightness(1.1) contrast(1.2);
+  animation: floatHorizontal 6s ease-in-out infinite;
+}
+
+@keyframes floatHorizontal {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 
 .skull-container {
@@ -37,8 +124,8 @@
 
 .skull-bg-image {
   position: absolute;
-  max-width: 60vw;
-  max-height: 70vh;
+  max-width: 80vw;
+  max-height: 85vh;
   width: auto;
   height: auto;
   display: block;
@@ -47,6 +134,19 @@
   z-index: 1;
   opacity: 0.6;
   filter: brightness(0.8) contrast(0.9);
+  animation: zoomInOut 8s ease-in-out infinite;
+}
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .skull-image {
@@ -128,15 +228,15 @@
     max-height: 60vh;
   }
   .skull-bg-image {
-    max-width: 85vw;
-    max-height: 60vh;
+    max-width: 90vw;
+    max-height: 70vh;
   }
   .mouth-svg-text {
     font-size: 4.5vw;
   }
   .grouped-skulls-image {
-    max-width: 90vw;
-    max-height: 12vh;
+    max-width: 98vw;
+    max-height: 18vh;
   }
 }
 
@@ -146,15 +246,15 @@
     max-height: 50vh;
   }
   .skull-bg-image {
-    max-width: 95vw;
-    max-height: 50vh;
+    max-width: 100vw;
+    max-height: 60vh;
   }
   .mouth-svg-text {
     font-size: 10vw;
   }
   .grouped-skulls-image {
-    max-width: 95vw;
-    max-height: 10vh;
+    max-width: 100vw;
+    max-height: 15vh;
   }
 }
 

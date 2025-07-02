@@ -4,6 +4,8 @@ import './HomePage.css';
 import skullImage from '../assets/skull.png';
 import skullBgImage from '../assets/skull_bg.png';
 import groupedSkullsImage from '../assets/grouped_skulls.png';
+import rightStarsImage from '../assets/right_stars.png';
+import leftStarsImage from '../assets/left_stars.png';
 
 function Home() {
   const text = "Those Who Wander May Enter";
@@ -17,14 +19,15 @@ function Home() {
     };
 
     const handleKeyPress = (e) => {
-      if (e.key === 'f' || e.key === 'F') {
-        setIsFlashlightActive(!isFlashlightActive);
+      if (e.key.toLowerCase() === 's') {
+        setIsFlashlightActive(prev => !prev);
       }
     };
 
     if (isFlashlightActive) {
       document.addEventListener('mousemove', handleMouseMove);
     }
+    
     document.addEventListener('keydown', handleKeyPress);
 
     return () => {
@@ -35,15 +38,21 @@ function Home() {
 
   const flashlightStyle = {
     background: isFlashlightActive 
-      ? `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, 
+      ? `radial-gradient(circle 160px at ${mousePosition.x}px ${mousePosition.y}px, 
           rgba(0, 0, 0, 0) 0%, 
-          rgba(0, 0, 0, 0) 40px, 
-          rgba(0, 0, 0, 0.3) 60px, 
-          rgba(0, 0, 0, 0.6) 90px, 
-          rgba(0, 0, 0, 0.8) 120px, 
-          rgba(0, 0, 0, 0.95) 150px, 
-          rgba(0, 0, 0, 1) 100%)`
-      : 'rgba(0, 0, 0, 1)',
+          rgba(0, 0, 0, 0) 20px, 
+          rgba(0, 0, 0, 0.1) 35px, 
+          rgba(0, 0, 0, 0.2) 50px, 
+          rgba(0, 0, 0, 0.3) 65px, 
+          rgba(0, 0, 0, 0.4) 80px, 
+          rgba(0, 0, 0, 0.5) 95px, 
+          rgba(0, 0, 0, 0.6) 110px, 
+          rgba(0, 0, 0, 0.7) 125px, 
+          rgba(0, 0, 0, 0.8) 140px, 
+          rgba(0, 0, 0, 0.9) 155px, 
+          rgba(0, 0, 0, 0.95) 170px, 
+          rgba(0, 0, 0, 1) 185px)`
+      : 'transparent',
     position: 'fixed',
     top: 0,
     left: 0,
@@ -106,6 +115,24 @@ function Home() {
         />
       </div>
       
+      {/* Right stars */}
+      <div className="right-stars">
+        <img 
+          src={rightStarsImage} 
+          alt="Right Stars" 
+          className="right-stars-image"
+        />
+      </div>
+      
+      {/* Left stars */}
+      <div className="left-stars">
+        <img 
+          src={leftStarsImage} 
+          alt="Left Stars" 
+          className="left-stars-image"
+        />
+      </div>
+      
       {/* Bottom grouped skulls */}
       <div className="grouped-skulls-bottom">
         <img 
@@ -113,11 +140,6 @@ function Home() {
           alt="Grouped Skulls Bottom" 
           className="grouped-skulls-image"
         />
-      </div>
-      
-      {/* Flashlight instructions */}
-      <div className="flashlight-instructions">
-        Press 'F' to toggle flashlight
       </div>
     </div>
   );
