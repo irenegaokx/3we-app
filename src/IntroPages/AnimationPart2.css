@@ -77,7 +77,7 @@ html, body {
   }
 }
 
-.typing-overlay {
+.animation-part2-container .typing-overlay {
   position: fixed;
   left: 50%;
   top: 65%;
@@ -91,7 +91,7 @@ html, body {
   z-index: 2;
 }
 
-.typing-text {
+.animation-part2-container .typing-text {
   color: #fff;
   font-size: 1.4rem;
   font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
@@ -105,14 +105,14 @@ html, body {
   white-space: pre-line;
 }
 
-.cursor {
+.animation-part2-container .cursor {
   color: #fff;
   font-weight: bold;
   animation: blink 1s infinite;
   opacity: 0;
 }
 
-.cursor.visible {
+.animation-part2-container .cursor.visible {
   opacity: 1;
 }
 

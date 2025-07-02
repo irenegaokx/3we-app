@@ -1,0 +1,131 @@
+.animation-part3-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  color: white;
+  position: relative;
+}
+
+.left-image-wrapper {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 20px;
+}
+
+.skull-with-coin-image {
+  max-width: 85vw;
+  max-height: 105vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  filter: brightness(1.1) contrast(1.2);
+}
+
+.coin-overlay {
+  position: absolute;
+  top: 30%;
+  right: 7%;
+  width: 120px;
+  height: 120px;
+  background: #E97D02;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 
+    0 0 20px rgba(233, 125, 2, 0.6),
+    0 0 40px rgba(233, 125, 2, 0.4),
+    0 0 60px rgba(233, 125, 2, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: coinGlow 3s ease-in-out infinite, coinFloat 4s ease-in-out infinite;
+}
+
+@keyframes coinGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(233, 125, 2, 0.6),
+      0 0 40px rgba(233, 125, 2, 0.4),
+      0 0 60px rgba(233, 125, 2, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(233, 125, 2, 0.8),
+      0 0 60px rgba(233, 125, 2, 0.6),
+      0 0 90px rgba(233, 125, 2, 0.4),
+      inset 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@keyframes coinFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animation-part3-container .typing-overlay {
+  position: fixed;
+  left: 50%;
+  bottom: 7vh;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.animation-part3-container .typing-overlay.right {
+  left: auto;
+  right: 2vw;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  width: 35vw;
+  max-width: 600px;
+  min-width: 300px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.animation-part3-container .typing-text {
+  color: #fff;
+  font-size: 1.6rem;
+  font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+  text-align: left;
+  text-shadow: 0 2px 8px #000, 0 0 2px #222;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  letter-spacing: 0.01em;
+  box-sizing: border-box;
+  user-select: none;
+  white-space: pre-line;
+}
+
+.animation-part3-container .cursor {
+  color: #fff;
+  font-weight: bold;
+  animation: blink 1s infinite;
+  opacity: 0;
+}
+
+.animation-part3-container .cursor.visible {
+  opacity: 1;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

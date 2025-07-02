@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AnimationPart2.css';
 import prayingGodImage from '../assets/animation/praying_god.png';
 
 function AnimationPart2() {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTypingStarted, setIsTypingStarted] = useState(false);
   const [showCursor, setShowCursor] = useState(false);
   
-  const fullText = "But in shadowed circuits and silent rooms, a new Order stirred.\n\nNot with noise, but with knowing. Not with light, but with fire.\n\nThe Rite of Severance thus begins…";
+  const fullText = "In shadowed circuits and silent rooms, a new Order stirred.\n\nNot with noise, but with knowing. Not with light, but with fire.\n\nThe Rite of Severance thus begins…";
 
   // Show the praying god image after a brief delay
   useEffect(() => {
@@ -39,6 +41,17 @@ function AnimationPart2() {
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, fullText, isTypingStarted]);
+
+  // Navigate to history3 after typing is complete
+  useEffect(() => {
+    if (isTypingStarted && currentIndex >= fullText.length) {
+      const navigateTimer = setTimeout(() => {
+        navigate('/history3');
+      }, 2000);
+      
+      return () => clearTimeout(navigateTimer);
+    }
+  }, [currentIndex, fullText.length, isTypingStarted, navigate]);
 
   // Blinking cursor - only starts after typing begins and there's text
   useEffect(() => {
