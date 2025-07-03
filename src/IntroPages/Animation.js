@@ -8,6 +8,7 @@ function Animation() {
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTypingStarted, setIsTypingStarted] = useState(false);
+  const [isTextFilled, setIsTextFilled] = useState(false);
   const fullText = "In the cycle of Obscura, beneath the hum of machines, a Covenant was broken.\n\nThe Eye was stolen. The Flesh, pacified. The Will, diluted.\n\nThe Screen became the new altar, and the Feed became the false God.";
   const [showCursor, setShowCursor] = useState(true);
 
@@ -70,6 +71,46 @@ function Animation() {
 
   return (
     <div className="animation-container">
+      <button
+        className="skip-button scary-skip"
+        style={{
+          position: 'fixed',
+          top: 20,
+          right: 30,
+          zIndex: 2000,
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          width: 'auto',
+          height: 'auto',
+          cursor: 'pointer',
+        }}
+        onClick={() => {
+          if (!isTextFilled) {
+            // First click: fill all text
+            setText(fullText);
+            setCurrentIndex(fullText.length);
+            setIsTypingStarted(true);
+            setIsTextFilled(true);
+          } else {
+            // Second click: navigate to beginning of next page
+            navigate('/history2');
+          }
+        }}
+        aria-label="Skip animation"
+      >
+        <svg className="scary-skip-icon" width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="10,8 34,27 10,46" fill="#ff2222" filter="url(#glow)"/>
+          <polygon points="26,8 50,27 26,46" fill="#ff2222" filter="url(#glow)"/>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </svg>
+      </button>
       <img
         className="centered-image"
         src={mouthHandsImage}

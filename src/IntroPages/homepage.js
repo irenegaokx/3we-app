@@ -38,20 +38,20 @@ function Home() {
 
   const flashlightStyle = {
     background: isFlashlightActive 
-      ? `radial-gradient(circle 160px at ${mousePosition.x}px ${mousePosition.y}px, 
+      ? `radial-gradient(circle 190px at ${mousePosition.x}px ${mousePosition.y}px, 
           rgba(0, 0, 0, 0) 0%, 
-          rgba(0, 0, 0, 0) 20px, 
-          rgba(0, 0, 0, 0.1) 35px, 
-          rgba(0, 0, 0, 0.2) 50px, 
-          rgba(0, 0, 0, 0.3) 65px, 
-          rgba(0, 0, 0, 0.4) 80px, 
-          rgba(0, 0, 0, 0.5) 95px, 
-          rgba(0, 0, 0, 0.6) 110px, 
-          rgba(0, 0, 0, 0.7) 125px, 
-          rgba(0, 0, 0, 0.8) 140px, 
-          rgba(0, 0, 0, 0.9) 155px, 
-          rgba(0, 0, 0, 0.95) 170px, 
-          rgba(0, 0, 0, 1) 185px)`
+          rgba(0, 0, 0, 0) 30px, 
+          rgba(0, 0, 0, 0.1) 55px, 
+          rgba(0, 0, 0, 0.2) 80px, 
+          rgba(0, 0, 0, 0.3) 105px, 
+          rgba(0, 0, 0, 0.4) 130px, 
+          rgba(0, 0, 0, 0.5) 155px, 
+          rgba(0, 0, 0, 0.6) 170px, 
+          rgba(0, 0, 0, 0.7) 180px, 
+          rgba(0, 0, 0, 0.8) 190px, 
+          rgba(0, 0, 0, 0.9) 200px, 
+          rgba(0, 0, 0, 0.95) 210px, 
+          rgba(0, 0, 0, 1) 220px)`
       : 'transparent',
     position: 'fixed',
     top: 0,
