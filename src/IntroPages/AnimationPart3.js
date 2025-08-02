@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './AnimationPart3.css';
 import skullWithCoinImage from '../assets/animation/skull_with_coin.png';
+import redHandsImage from '../assets/animation/red_hands.PNG'
+import handsUp from '../assets/animation/hands_up.PNG';
 
 function AnimationPart3() {
   const location = useLocation();
@@ -9,6 +11,12 @@ function AnimationPart3() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTypingStarted, setIsTypingStarted] = useState(false);
   const [showCursor, setShowCursor] = useState(false);
+  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
+  const [userInput, setUserInput] = useState('');
+  const [showRedHands, setShowRedHands] = useState(false);
+  const [showHandsUp, setShowHandsUp] = useState(false);
+  const [showMiddleHandsUp, setShowMiddleHandsUp] = useState(false);
+  const [showOuterHandsUp, setShowOuterHandsUp] = useState(false);
   
   const fullText = "Then the Coin shall find you.\n\nNot given. Not earned. But summoned.\n\nAn echo of the Before. A sigil of refusal.\n\nA weapon forged from your withdrawal.\n\nAre you ready to hold the weapon? Y/N";
 
@@ -18,6 +26,7 @@ function AnimationPart3() {
       setText(fullText);
       setCurrentIndex(fullText.length);
       setIsTypingStarted(true);
+      setIsAnimationComplete(true);
     }
   }, [location.state, fullText]);
 
@@ -38,6 +47,9 @@ function AnimationPart3() {
         setCurrentIndex(prev => prev + 1);
       }, 80);
       return () => clearTimeout(timeout);
+    } else if (isTypingStarted && currentIndex >= fullText.length) {
+      // Animation is complete
+      setIsAnimationComplete(true);
     }
   }, [currentIndex, fullText, isTypingStarted]);
 
@@ -50,6 +62,39 @@ function AnimationPart3() {
     }, 500);
     return () => clearInterval(cursorInterval);
   }, [isTypingStarted, text.length]);
+
+  // Handle keyboard input when animation is complete
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (isAnimationComplete) {
+        if (event.key.toLowerCase() === 'y' && userInput === '') {
+          setUserInput('Y');
+          // Trigger red hands animation immediately
+          setShowRedHands(true);
+          // Trigger hands up animation after 0.5 seconds
+          setTimeout(() => {
+            setShowHandsUp(true);
+          }, 500);
+          // Trigger middle hands up animation after 1.25 seconds
+          setTimeout(() => {
+            setShowMiddleHandsUp(true);
+          }, 1250);
+          // Trigger outer hands up animation after 2 seconds
+          setTimeout(() => {
+            setShowOuterHandsUp(true);
+          }, 2000);
+        }
+        if (event.key.toLowerCase() === 'n' && userInput === '') {
+          setUserInput('N');
+        }
+      }
+    };
+
+    if (isAnimationComplete) {
+      document.addEventListener('keydown', handleKeyPress);
+      return () => document.removeEventListener('keydown', handleKeyPress);
+    }
+  }, [isAnimationComplete, userInput]);
 
   return (
     <div className="animation-part3-container">
@@ -71,6 +116,7 @@ function AnimationPart3() {
           setText(fullText);
           setCurrentIndex(fullText.length);
           setIsTypingStarted(true);
+          setIsAnimationComplete(true);
         }}
         aria-label="Skip animation"
       >
@@ -86,6 +132,7 @@ function AnimationPart3() {
           </filter>
         </svg>
       </button>
+      
       <div className="left-image-wrapper">
         <img
           className="skull-with-coin-image"
@@ -94,10 +141,75 @@ function AnimationPart3() {
         />
         <div className="coin-overlay"></div>
       </div>
+      
+      {showRedHands && (
+        <div className="red-hands-wrapper">
+          <img
+            className="red-hands-image"
+            src={redHandsImage}
+            alt="Red Hands"
+          />
+        </div>
+      )}
+      
+      {showHandsUp && (
+        <div className="hands-up-wrapper">
+          <img
+            className="hands-up-image left"
+            src={handsUp}
+            alt="Hands Up Left"
+          />
+          <img
+            className="hands-up-image right"
+            src={handsUp}
+            alt="Hands Up Right"
+          />
+        </div>
+      )}
+      
+      {showMiddleHandsUp && (
+        <div className="middle-hands-up-wrapper">
+          <img
+            className="middle-hands-up-image left"
+            src={handsUp}
+            alt="Middle Hands Up Left"
+          />
+          <img
+            className="middle-hands-up-image right"
+            src={handsUp}
+            alt="Middle Hands Up Right"
+          />
+        </div>
+      )}
+      
+      {showOuterHandsUp && (
+        <div className="outer-hands-up-wrapper">
+          <img
+            className="outer-hands-up-image left"
+            src={handsUp}
+            alt="Outer Hands Up Left"
+          />
+          <img
+            className="outer-hands-up-image right"
+            src={handsUp}
+            alt="Outer Hands Up Right"
+          />
+        </div>
+      )}
+      
       <div className="typing-overlay right">
         <span className="typing-text">
           {text}
-          {showCursor && isTypingStarted && text.length > 0 && (
+          {userInput && (
+            <>
+              {' '}
+              <span className="user-input">{userInput}</span>
+            </>
+          )}
+          {showCursor && isTypingStarted && text.length > 0 && !isAnimationComplete && (
+            <span className="cursor visible">|</span>
+          )}
+          {isAnimationComplete && userInput === '' && (
             <span className="cursor visible">|</span>
           )}
         </span>
