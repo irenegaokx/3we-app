@@ -111,7 +111,7 @@ function Home() {
             zIndex: 20,
             background: 'transparent',
           }}
-          onClick={() => navigate('/history')}
+          onClick={() => navigate('/new_animation')}
         />
       </div>
       

@@ -1,0 +1,288 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.new-animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Eyes Video Strips */
+.eyes-video-strip {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 120px;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  pointer-events: none;
+  justify-content: space-between;
+}
+
+.eyes-video-strip.top {
+  top: 0;
+}
+
+.eyes-video-strip.bottom {
+  bottom: 0;
+}
+
+.eyes-video-instance {
+  height: 100%;
+  width: 12.5vw;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typing Text Overlay */
+.typing-overlay {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.typing-text {
+  color: #fff;
+  font-size: 1.4rem;
+  font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+  text-align: center;
+  text-shadow: 0 2px 8px #000, 0 0 2px #222;
+  padding: 1rem;
+  border-radius: 8px;
+  letter-spacing: 0.01em;
+  box-sizing: border-box;
+  user-select: none;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+.cursor {
+  color: #fff;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+.cursor.visible {
+  opacity: 1;
+}
+
+.cursor:not(.visible) {
+  opacity: 0;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Skip Button Styles */
+.scary-skip {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.scary-skip-icon {
+  filter: drop-shadow(0 0 12px #ff2222) drop-shadow(0 0 24px #ff2222cc);
+  transition: filter 0.2s, transform 0.2s;
+  animation: scary-flicker 1.2s infinite;
+}
+
+.scary-skip:hover .scary-skip-icon {
+  filter: drop-shadow(0 0 24px #ff2222) drop-shadow(0 0 48px #ff2222cc) brightness(1.5);
+  transform: scale(1.08) rotate(-6deg);
+  animation: scary-flicker-fast 0.3s infinite;
+}
+
+@keyframes scary-flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px #ff2222) drop-shadow(0 0 24px #ff2222cc); }
+  10% { opacity: 0.85; filter: drop-shadow(0 0 18px #ff2222) drop-shadow(0 0 36px #ff2222cc); }
+  20% { opacity: 0.7; filter: drop-shadow(0 0 8px #ff2222) drop-shadow(0 0 16px #ff2222cc); }
+  22% { opacity: 0.5; filter: drop-shadow(0 0 4px #ff2222); }
+  24% { opacity: 0.95; filter: drop-shadow(0 0 16px #ff2222) drop-shadow(0 0 28px #ff2222cc); }
+  30% { opacity: 0.88; filter: drop-shadow(0 0 10px #ff2222) drop-shadow(0 0 20px #ff2222cc); }
+  35% { opacity: 0.8; filter: drop-shadow(0 0 6px #ff2222); }
+  40% { opacity: 1; filter: drop-shadow(0 0 18px #ff2222) drop-shadow(0 0 32px #ff2222cc); }
+  50% { opacity: 0.9; filter: drop-shadow(0 0 10px #ff2222) drop-shadow(0 0 20px #ff2222cc); }
+  60% { opacity: 0.85; filter: drop-shadow(0 0 6px #ff2222); }
+  70% { opacity: 1; filter: drop-shadow(0 0 20px #ff2222) drop-shadow(0 0 36px #ff2222cc); }
+  80% { opacity: 0.9; filter: drop-shadow(0 0 10px #ff2222) drop-shadow(0 0 20px #ff2222cc); }
+  90% { opacity: 0.95; filter: drop-shadow(0 0 16px #ff2222) drop-shadow(0 0 28px #ff2222cc); }
+}
+
+@keyframes scary-flicker-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.left-window,
+.right-window {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 25vw;
+  max-height: 60vh;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+}
+
+.left-window {
+  left: var(--left-window-shift, -30vw); /* Dynamic position controlled by JS */
+}
+
+.right-window {
+  right: var(--right-window-shift, -30vw); /* Dynamic position controlled by JS */
+  transform: translateY(-50%) scaleX(-1); /* Flip the right window horizontally */
+}
+
+/* Shake animation during movement - more intense */
+.left-window.slide-in {
+  animation: shake-intense 0.5s infinite;
+}
+
+.right-window.slide-in {
+  animation: shake-intense-right 0.5s infinite;
+}
+
+
+
+/* Intense shake during movement */
+@keyframes shake-intense {
+  0% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
+  10% { transform: translateY(-50%) translate(-3px, -2px) rotate(-0.5deg); }
+  20% { transform: translateY(-50%) translate(-2px, 3px) rotate(0.5deg); }
+  30% { transform: translateY(-50%) translate(3px, -2px) rotate(0.3deg); }
+  40% { transform: translateY(-50%) translate(-2px, 3px) rotate(-0.3deg); }
+  50% { transform: translateY(-50%) translate(3px, -3px) rotate(0.5deg); }
+  60% { transform: translateY(-50%) translate(-3px, 2px) rotate(-0.5deg); }
+  70% { transform: translateY(-50%) translate(3px, 2px) rotate(0.3deg); }
+  80% { transform: translateY(-50%) translate(-2px, -3px) rotate(-0.3deg); }
+  90% { transform: translateY(-50%) translate(2px, 3px) rotate(0.5deg); }
+  100% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
+}
+
+/* Gentle shake when stationary */
+@keyframes shake-gentle {
+  0% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
+  10% { transform: translateY(-50%) translate(-1px, -0.5px) rotate(-0.2deg); }
+  20% { transform: translateY(-50%) translate(-0.5px, 1px) rotate(0.2deg); }
+  30% { transform: translateY(-50%) translate(1px, -0.5px) rotate(0.1deg); }
+  40% { transform: translateY(-50%) translate(-0.5px, 1px) rotate(-0.1deg); }
+  50% { transform: translateY(-50%) translate(1px, -1px) rotate(0.2deg); }
+  60% { transform: translateY(-50%) translate(-1px, 0.5px) rotate(-0.2deg); }
+  70% { transform: translateY(-50%) translate(1px, 0.5px) rotate(0.1deg); }
+  80% { transform: translateY(-50%) translate(-0.5px, -1px) rotate(-0.1deg); }
+  90% { transform: translateY(-50%) translate(0.5px, 1px) rotate(0.2deg); }
+  100% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
+}
+
+/* Intense shake during movement for right window */
+@keyframes shake-intense-right {
+  0% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
+  10% { transform: translateY(-50%) scaleX(-1) translate(-3px, -2px) rotate(-0.5deg); }
+  20% { transform: translateY(-50%) scaleX(-1) translate(-2px, 3px) rotate(0.5deg); }
+  30% { transform: translateY(-50%) scaleX(-1) translate(3px, -2px) rotate(0.3deg); }
+  40% { transform: translateY(-50%) scaleX(-1) translate(-2px, 3px) rotate(-0.3deg); }
+  50% { transform: translateY(-50%) scaleX(-1) translate(3px, -3px) rotate(0.5deg); }
+  60% { transform: translateY(-50%) scaleX(-1) translate(-3px, 2px) rotate(-0.5deg); }
+  70% { transform: translateY(-50%) scaleX(-1) translate(3px, 2px) rotate(0.3deg); }
+  80% { transform: translateY(-50%) scaleX(-1) translate(-2px, -3px) rotate(-0.3deg); }
+  90% { transform: translateY(-50%) scaleX(-1) translate(2px, 3px) rotate(0.5deg); }
+  100% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
+}
+
+/* Gentle shake when stationary for right window */
+@keyframes shake-gentle-right {
+  0% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
+  10% { transform: translateY(-50%) scaleX(-1) translate(-1px, -0.5px) rotate(-0.2deg); }
+  20% { transform: translateY(-50%) scaleX(-1) translate(-0.5px, 1px) rotate(0.2deg); }
+  30% { transform: translateY(-50%) scaleX(-1) translate(1px, -0.5px) rotate(0.1deg); }
+  40% { transform: translateY(-50%) scaleX(-1) translate(-0.5px, 1px) rotate(-0.1deg); }
+  50% { transform: translateY(-50%) scaleX(-1) translate(1px, -1px) rotate(0.2deg); }
+  60% { transform: translateY(-50%) scaleX(-1) translate(-1px, 0.5px) rotate(-0.2deg); }
+  70% { transform: translateY(-50%) scaleX(-1) translate(1px, 0.5px) rotate(0.1deg); }
+  80% { transform: translateY(-50%) scaleX(-1) translate(-0.5px, -1px) rotate(-0.1deg); }
+  90% { transform: translateY(-50%) scaleX(-1) translate(0.5px, 1px) rotate(0.2deg); }
+  100% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
+}
+
+/* Skip button styles - same as the original animation */
+.scary-skip {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.scary-skip-icon {
+  filter: drop-shadow(0 0 12px #ff2222) drop-shadow(0 0 24px #ff2222cc);
+  transition: filter 0.2s, transform 0.2s;
+  animation: scary-flicker 1.2s infinite;
+}
+
+.scary-skip:hover .scary-skip-icon {
+  filter: drop-shadow(0 0 24px #ff2222) drop-shadow(0 0 48px #ff2222cc) brightness(1.5);
+  transform: scale(1.08) rotate(-6deg);
+  animation: scary-flicker-fast 0.3s infinite;
+}
+
+@keyframes scary-flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px #ff2222) drop-shadow(0 0 24px #ff2222cc); }
+  10% { opacity: 0.85; filter: drop-shadow(0 0 18px #ff2222) drop-shadow(0 0 36px #ff2222cc); }
+  20% { opacity: 0.7; filter: drop-shadow(0 0 8px #ff2222) drop-shadow(0 0 16px #ff2222cc); }
+  22% { opacity: 0.5; filter: drop-shadow(0 0 4px #ff2222); }
+  24% { opacity: 0.95; filter: drop-shadow(0 0 16px #ff2222) drop-shadow(0 0 28px #ff2222cc); }
+  30% { opacity: 0.88; filter: drop-shadow(0 0 10px #ff2222) drop-shadow(0 0 20px #ff2222cc); }
+  35% { opacity: 0.8; filter: drop-shadow(0 0 6px #ff2222); }
+  40% { opacity: 1; filter: drop-shadow(0 0 18px #ff2222) drop-shadow(0 0 32px #ff2222cc); }
+  50% { opacity: 0.9; filter: drop-shadow(0 0 10px #ff2222) drop-shadow(0 0 20px #ff2222cc); }
+  60% { opacity: 0.85; filter: drop-shadow(0 0 6px #ff2222); }
+  70% { opacity: 1; filter: drop-shadow(0 0 20px #ff2222) drop-shadow(0 0 36px #ff2222cc); }
+  80% { opacity: 0.9; filter: drop-shadow(0 0 10px #ff2222) drop-shadow(0 0 20px #ff2222cc); }
+  90% { opacity: 0.95; filter: drop-shadow(0 0 16px #ff2222) drop-shadow(0 0 28px #ff2222cc); }
+}
+
+@keyframes scary-flicker-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+
