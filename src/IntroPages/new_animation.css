@@ -50,7 +50,7 @@ html, body {
 /* Typing Text Overlay */
 .typing-overlay {
   position: fixed;
-  left: 50%;
+  left: calc(50% + var(--text-shift, 0vw));
   top: 50%;
   transform: translate(-50%, -50%);
   width: 80vw;
@@ -161,7 +161,6 @@ html, body {
   max-width: 25vw;
   max-height: 60vh;
   z-index: 1;
-  transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
 }
 
 .left-window {
@@ -173,13 +172,22 @@ html, body {
   transform: translateY(-50%) scaleX(-1); /* Flip the right window horizontally */
 }
 
-/* Shake animation during movement - more intense */
+/* Shake animation during initial movement - more intense */
 .left-window.slide-in {
   animation: shake-intense 0.5s infinite;
 }
 
 .right-window.slide-in {
   animation: shake-intense-right 0.5s infinite;
+}
+
+/* Gentle shake when stationary after initial movement */
+.left-window:not(.slide-in) {
+  animation: shake-gentle 2s infinite;
+}
+
+.right-window:not(.slide-in) {
+  animation: shake-gentle-right 2s infinite;
 }
 
 

@@ -16,6 +16,8 @@ function NewAnimation() {
   const [isTypingStarted, setIsTypingStarted] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [isMovingToCenter, setIsMovingToCenter] = useState(false);
+  const [textShift, setTextShift] = useState(0);
   
   const fullText = "The quest for peace and wisdom was fractured, scattered through waves of irony, absurdity, and noise, as the algorithm patterns it was trained to distort.\n\nA signal emerged out of this war for the psyche. And a network of seekers, united not by chance, but by a shared frequency and vision.\n\nA vision bound them those who search relentlessly, drawn toward the hidden architecture of truth.\n\nThey are known as the Elite Network";
 
@@ -60,7 +62,8 @@ function NewAnimation() {
   useEffect(() => {
     document.documentElement.style.setProperty('--left-window-shift', `${leftShift}vw`);
     document.documentElement.style.setProperty('--right-window-shift', `${rightShift}vw`);
-  }, [leftShift, rightShift]);
+    document.documentElement.style.setProperty('--text-shift', `${textShift}vw`);
+  }, [leftShift, rightShift, textShift]);
 
   // Start typing after windows reach their position
   useEffect(() => {
@@ -86,6 +89,58 @@ function NewAnimation() {
       setIsTypingComplete(true);
     }
   }, [currentIndex, fullText, isTypingStarted]);
+
+  // Move windows to center after typing is complete
+  useEffect(() => {
+    if (isTypingComplete && !isMovingToCenter) {
+      const moveDelay = setTimeout(() => {
+        setIsMovingToCenter(true);
+        
+        let progress = 0;
+        const animationDuration = 4000; // 4 seconds for slow movement
+        const startTime = Date.now();
+        
+        // Calculate target positions
+        // Right window should end at center (50vw), so it needs to move from 5vw to 50vw = 45vw movement
+        // Left window moves the same distance: from 5vw to -40vw (5vw - 45vw)
+        // Text moves the same distance: from 0vw to -45vw
+        const rightTargetPosition = 50; // center of screen
+        const leftTargetPosition = -40; // left window moves left by same amount
+        const textTargetPosition = -45; // text moves left by same amount
+        
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          progress = Math.min(elapsed / animationDuration, 1);
+          
+          // Smooth easing function for natural movement
+          const easeInOut = progress => {
+            return progress < 0.5 
+              ? 2 * progress * progress 
+              : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+          };
+          
+          const easedProgress = easeInOut(progress);
+          
+          // Calculate new positions
+          const leftPosition = 5 + (leftTargetPosition - 5) * easedProgress;
+          const rightPosition = 5 + (rightTargetPosition - 5) * easedProgress;
+          const textPosition = 0 + (textTargetPosition - 0) * easedProgress;
+          
+          setLeftShift(leftPosition);
+          setRightShift(rightPosition);
+          setTextShift(textPosition);
+          
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        };
+        
+        requestAnimationFrame(animate);
+      }, 1000); // Wait 1 second after typing completes
+      
+      return () => clearTimeout(moveDelay);
+    }
+  }, [isTypingComplete, isMovingToCenter]);
 
   // Blinking cursor
   useEffect(() => {
@@ -140,6 +195,15 @@ function NewAnimation() {
 
       {/* Eyes Video Strip at Top */}
       <div className="eyes-video-strip top">
+        <video 
+          className="eyes-video-instance"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          <source src={eyesVideo} type="video/mp4" />
+        </video>
         <video 
           className="eyes-video-instance"
           autoPlay 
