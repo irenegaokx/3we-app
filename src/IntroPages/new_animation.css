@@ -169,7 +169,7 @@ html, body {
 
 .right-window {
   right: var(--right-window-shift, -30vw); /* Dynamic position controlled by JS */
-  transform: translateY(-50%) scaleX(-1); /* Flip the right window horizontally */
+  transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)); /* Flip the right window horizontally and apply zoom */
 }
 
 /* Shake animation during initial movement - more intense */
@@ -181,13 +181,13 @@ html, body {
   animation: shake-intense-right 0.5s infinite;
 }
 
-/* Gentle shake when stationary after initial movement */
-.left-window:not(.slide-in) {
-  animation: shake-gentle 2s infinite;
+/* Shake animation during center movement */
+.left-window.center-moving {
+  animation: shake-intense 0.5s infinite !important;
 }
 
-.right-window:not(.slide-in) {
-  animation: shake-gentle-right 2s infinite;
+.right-window.center-moving {
+  animation: shake-intense-right 0.5s infinite !important;
 }
 
 
@@ -207,49 +207,19 @@ html, body {
   100% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
 }
 
-/* Gentle shake when stationary */
-@keyframes shake-gentle {
-  0% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
-  10% { transform: translateY(-50%) translate(-1px, -0.5px) rotate(-0.2deg); }
-  20% { transform: translateY(-50%) translate(-0.5px, 1px) rotate(0.2deg); }
-  30% { transform: translateY(-50%) translate(1px, -0.5px) rotate(0.1deg); }
-  40% { transform: translateY(-50%) translate(-0.5px, 1px) rotate(-0.1deg); }
-  50% { transform: translateY(-50%) translate(1px, -1px) rotate(0.2deg); }
-  60% { transform: translateY(-50%) translate(-1px, 0.5px) rotate(-0.2deg); }
-  70% { transform: translateY(-50%) translate(1px, 0.5px) rotate(0.1deg); }
-  80% { transform: translateY(-50%) translate(-0.5px, -1px) rotate(-0.1deg); }
-  90% { transform: translateY(-50%) translate(0.5px, 1px) rotate(0.2deg); }
-  100% { transform: translateY(-50%) translate(0, 0) rotate(0deg); }
-}
-
 /* Intense shake during movement for right window */
 @keyframes shake-intense-right {
-  0% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
-  10% { transform: translateY(-50%) scaleX(-1) translate(-3px, -2px) rotate(-0.5deg); }
-  20% { transform: translateY(-50%) scaleX(-1) translate(-2px, 3px) rotate(0.5deg); }
-  30% { transform: translateY(-50%) scaleX(-1) translate(3px, -2px) rotate(0.3deg); }
-  40% { transform: translateY(-50%) scaleX(-1) translate(-2px, 3px) rotate(-0.3deg); }
-  50% { transform: translateY(-50%) scaleX(-1) translate(3px, -3px) rotate(0.5deg); }
-  60% { transform: translateY(-50%) scaleX(-1) translate(-3px, 2px) rotate(-0.5deg); }
-  70% { transform: translateY(-50%) scaleX(-1) translate(3px, 2px) rotate(0.3deg); }
-  80% { transform: translateY(-50%) scaleX(-1) translate(-2px, -3px) rotate(-0.3deg); }
-  90% { transform: translateY(-50%) scaleX(-1) translate(2px, 3px) rotate(0.5deg); }
-  100% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
-}
-
-/* Gentle shake when stationary for right window */
-@keyframes shake-gentle-right {
-  0% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
-  10% { transform: translateY(-50%) scaleX(-1) translate(-1px, -0.5px) rotate(-0.2deg); }
-  20% { transform: translateY(-50%) scaleX(-1) translate(-0.5px, 1px) rotate(0.2deg); }
-  30% { transform: translateY(-50%) scaleX(-1) translate(1px, -0.5px) rotate(0.1deg); }
-  40% { transform: translateY(-50%) scaleX(-1) translate(-0.5px, 1px) rotate(-0.1deg); }
-  50% { transform: translateY(-50%) scaleX(-1) translate(1px, -1px) rotate(0.2deg); }
-  60% { transform: translateY(-50%) scaleX(-1) translate(-1px, 0.5px) rotate(-0.2deg); }
-  70% { transform: translateY(-50%) scaleX(-1) translate(1px, 0.5px) rotate(0.1deg); }
-  80% { transform: translateY(-50%) scaleX(-1) translate(-0.5px, -1px) rotate(-0.1deg); }
-  90% { transform: translateY(-50%) scaleX(-1) translate(0.5px, 1px) rotate(0.2deg); }
-  100% { transform: translateY(-50%) scaleX(-1) translate(0, 0) rotate(0deg); }
+  0% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(0, 0) rotate(0deg); }
+  10% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(-3px, -2px) rotate(-0.5deg); }
+  20% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(-2px, 3px) rotate(0.5deg); }
+  30% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(3px, -2px) rotate(0.3deg); }
+  40% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(-2px, 3px) rotate(-0.3deg); }
+  50% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(3px, -3px) rotate(0.5deg); }
+  60% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(-3px, 2px) rotate(-0.5deg); }
+  70% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(3px, 2px) rotate(0.3deg); }
+  80% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(-2px, -3px) rotate(-0.3deg); }
+  90% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(2px, 3px) rotate(0.5deg); }
+  100% { transform: translateY(-50%) scaleX(-1) scale(var(--zoom-scale, 1)) translate(0, 0) rotate(0deg); }
 }
 
 /* Skip button styles - same as the original animation */
@@ -291,6 +261,27 @@ html, body {
 @keyframes scary-flicker-fast {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+
+/* Black Screen Overlay */
+.black-screen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 1000;
+  animation: fadeInBlack 1s ease-in-out;
+}
+
+@keyframes fadeInBlack {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 
