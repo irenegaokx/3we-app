@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './new_animation.css';
 import redWindowImage from '../assets/new_animation/red_window.png';
 import eyesVideo from '../assets/new_animation/eyes_moving.mp4';
 
 
 function NewAnimation() {
+  const navigate = useNavigate();
   const [isAnimationStarted, setIsAnimationStarted] = useState(false);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const [leftShift, setLeftShift] = useState(-30);
@@ -171,6 +173,11 @@ function NewAnimation() {
                   // Zoom animation complete - show black screen
                   setTimeout(() => {
                     setShowBlackScreen(true);
+                    
+                    // Navigate to new_animation2 after black screen appears
+                    setTimeout(() => {
+                      navigate('/new_animation2');
+                    }, 2000); // Wait 2 seconds after black screen appears
                   }, 500); // Wait 0.5 seconds after zoom completes
                 }
               };
