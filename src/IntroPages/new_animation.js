@@ -18,7 +18,7 @@ function NewAnimation() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [isMovingToCenter, setIsMovingToCenter] = useState(false);
   const [textShift, setTextShift] = useState(0);
-  const [isZoomingIn, setIsZoomingIn] = useState(false);
+  // const [isZoomingIn, setIsZoomingIn] = useState(false);
   const [zoomScale, setZoomScale] = useState(1);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
   const [isCenterMoving, setIsCenterMoving] = useState(false);
@@ -143,7 +143,7 @@ function NewAnimation() {
             console.log('Setting center moving to false');
             setIsCenterMoving(false);
             setTimeout(() => {
-              setIsZoomingIn(true);
+              // setIsZoomingIn(true);
               
               let zoomProgress = 0;
               const zoomDuration = 4000; // 4 seconds for smooth zoom
@@ -194,7 +194,7 @@ function NewAnimation() {
       
       return () => clearTimeout(moveDelay);
     }
-  }, [isTypingComplete, isMovingToCenter]);
+  }, [isTypingComplete, isMovingToCenter, navigate]);
 
   // Debug center moving state
   useEffect(() => {
@@ -218,7 +218,7 @@ function NewAnimation() {
         className="skip-button scary-skip"
         style={{
           position: 'fixed',
-          top: 100,
+          top: 130,
           right: 30,
           zIndex: 2000,
           background: 'none',

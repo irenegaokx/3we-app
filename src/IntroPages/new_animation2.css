@@ -1,122 +1,132 @@
+/* Clean slate for new_animation2 */
+
 .new-animation2-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: #000;
-  color: #fff;
-  font-family: 'Arial', sans-serif;
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 
-/* Movingcircle Video Background */
-.movingcircle-video-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw; /* Bigger size - 80% of viewport width */
-  height: 80vh; /* Bigger size - 80% of viewport height */
-  z-index: 1;
-  pointer-events: none;
-}
-
-.movingcircle-video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Changed from 'cover' to 'contain' to prevent cropping */
-  filter: brightness(0.4); /* Make the video 60% darker */
-}
-
-/* Statues Image Overlay */
-.statues-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -45%); /* Moved down by changing Y from -50% to -30% */
-  z-index: 2;
-  pointer-events: none;
-}
-
-.statues-image {
-  width: 120vw;
-  height: 120vh;
+.flower-door-image {
+  max-width: 35vw;
+  max-height: 35vh;
   object-fit: contain;
+  z-index: 10;
 }
 
-/* Flowers Door Overlay */
-.flowers-door-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  pointer-events: none;
-}
-
-.flowers-door-image {
+/* Background Eyes Container */
+.background-eyes {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: contain;
-}
-
-/* Click to Reveal Section */
-.click-to-reveal-section {
-  position: absolute;
-  bottom: -20px; /* Positioned even lower */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
-  text-align: center;
   pointer-events: none;
-  line-height: 1; /* Reduce line height */
+  z-index: 5;
 }
 
-.click-to-reveal-text {
-  color: #fff;
-  font-size: 0.9rem; /* Smaller text size */
-  font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
-  text-shadow: 0 2px 8px #000, 0 0 2px #222;
-  margin: 0; /* Remove all margins */
-  padding: 0; /* Remove all padding */
-  letter-spacing: 0.01em;
-  line-height: 1; /* Reduce line height */
+/* Eye Video Container Base Styles */
+.eye-video-container {
+  position: absolute;
+  pointer-events: none;
 }
 
-.arrow-container {
-  animation: shake-arrow 0.5s infinite;
+.eyes-video-instance {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
-.cursor {
-  color: #fff;
-  font-weight: bold;
-  animation: blink 1s infinite;
+/* Varying brightness for different eyes */
+.eye-upper-left .eyes-video-instance {
+  filter: brightness(1.0) contrast(1.2);
 }
 
-@keyframes blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
+.eye-upper-left-2 .eyes-video-instance {
+  filter: brightness(0.8) contrast(1.1);
 }
 
-.red-cross-arrow {
-  transform: scale(0.8); /* Make the arrow bigger (was 0.5) */
+.eye-middle-left .eyes-video-instance {
+  filter: brightness(1.2) contrast(1.3);
 }
 
-@keyframes shake-arrow {
-  0% { transform: scale(0.5) translate(0, 0) rotate(0deg); }
-  10% { transform: scale(0.5) translate(-2px, -1px) rotate(-0.5deg); }
-  20% { transform: scale(0.5) translate(-1px, 2px) rotate(0.5deg); }
-  30% { transform: scale(0.5) translate(2px, -1px) rotate(0.3deg); }
-  40% { transform: scale(0.5) translate(-1px, 2px) rotate(-0.3deg); }
-  50% { transform: scale(0.5) translate(2px, -2px) rotate(0.5deg); }
-  60% { transform: scale(0.5) translate(-2px, 1px) rotate(-0.5deg); }
-  70% { transform: scale(0.5) translate(2px, 1px) rotate(0.3deg); }
-  80% { transform: scale(0.5) translate(-1px, -2px) rotate(-0.3deg); }
-  90% { transform: scale(0.5) translate(1px, 2px) rotate(0.5deg); }
-  100% { transform: scale(0.5) translate(0, 0) rotate(0deg); }
+.eye-upper-right .eyes-video-instance {
+  filter: brightness(0.7) contrast(1.0);
 }
+
+.eye-upper-right-2 .eyes-video-instance {
+  filter: brightness(1.3) contrast(1.2);
+}
+
+.eye-middle-right .eyes-video-instance {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.eye-lower-right .eyes-video-instance {
+  filter: brightness(1.5) contrast(1.2);
+}
+
+/* Different Eye Sizes */
+.eye-extra-large {
+  width: 240px;
+  height: 160px;
+}
+
+.eye-large {
+  width: 200px;
+  height: 130px;
+}
+
+.eye-medium {
+  width: 140px;
+  height: 100px;
+}
+
+.eye-small {
+  width: 100px;
+  height: 70px;
+}
+
+/* Eye Positions */
+.eye-upper-left {
+  top: 10%;
+  left: 20%;
+}
+
+.eye-upper-left-2 {
+  top: 50%;
+  left: 10%;
+}
+
+.eye-middle-left {
+  top: 80%;
+  left: 30%;
+}
+
+.eye-upper-right {
+  top: 8%;
+  right: 15%;
+}
+
+.eye-upper-right-2 {
+  top: 35%;
+  right: 8%;
+}
+
+.eye-middle-right {
+  top: 60%;
+  right: 20%;
+}
+
+.eye-lower-right {
+  bottom: 15%;
+  right: 12%;
+}
+
+
+
+
