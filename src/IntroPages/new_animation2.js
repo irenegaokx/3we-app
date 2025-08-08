@@ -5,6 +5,11 @@ import eyesVideo from '../assets/new_animation/eyes_moving.mp4';
 
 function NewAnimation2() {
   const [doorSize, setDoorSize] = useState(35); // Default size in vw
+  const [matrixColumns, setMatrixColumns] = useState([]);
+  const [flashPosition, setFlashPosition] = useState(0);
+
+  // Matrix characters for the digital rain effect
+  const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ハロエ木トルリコИX<>-=:^~';
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -17,7 +22,7 @@ function NewAnimation2() {
         setDoorSize(prevSize => Math.max(10, prevSize - 2));
       } else {
         // Scrolling up - make door bigger
-        setDoorSize(prevSize => Math.min(80, prevSize + 2));
+        setDoorSize(prevSize => Math.min(200, prevSize + 2));
       }
     };
 
@@ -31,10 +36,108 @@ function NewAnimation2() {
     };
   }, []);
 
+  // Initialize matrix columns
+  useEffect(() => {
+    setMatrixColumns(generateMatrixColumns());
+  }, []);
+
+  // Matrix animation effect
+  useEffect(() => {
+    if (matrixColumns.length === 0) return;
+
+    const animateMatrix = () => {
+      setMatrixColumns(prevColumns => 
+        prevColumns.map(column => ({
+          ...column,
+          chars: column.chars.map((char, index) => {
+            // Randomly change characters (glitch effect)
+            if (Math.random() < column.glitchChance) {
+              return matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            }
+            return char;
+          })
+        }))
+      );
+    };
+
+    const interval = setInterval(animateMatrix, 200);
+    return () => clearInterval(interval);
+  }, [matrixColumns.length]);
+
+  // Flash sweep animation
+  useEffect(() => {
+    const flashInterval = setInterval(() => {
+      setFlashPosition(prev => {
+        const newPosition = prev + 1;
+        return newPosition > 100 ? 0 : newPosition;
+      });
+    }, 50); // Flash moves every 50ms
+
+    return () => clearInterval(flashInterval);
+  }, []);
+
+  // Generate static Matrix columns
+  const generateMatrixColumns = () => {
+    const columns = [];
+    const numColumns = Math.floor(window.innerWidth / 20); // 20px per column
+    const numRows = Math.floor(window.innerHeight / 20); // 20px per row
+    
+    for (let i = 0; i < numColumns; i++) {
+      columns.push({
+        id: i,
+        x: i * 20,
+        chars: Array.from({ length: numRows }, () => matrixChars[Math.floor(Math.random() * matrixChars.length)]),
+        glitchChance: Math.random() * 0.1 // Random glitch probability
+      });
+    }
+    return columns;
+  };
+
   return (
     <div className="new-animation2-container">
+      {/* Matrix Digital Rain Background */}
+      <div className="matrix-background">
+        {/* Flash sweep effect */}
+        <div 
+          className="flash-sweep"
+          style={{
+            top: `${flashPosition}%`
+          }}
+        />
+        
+        {matrixColumns.map(column => (
+          <div
+            key={column.id}
+            className="matrix-column"
+            style={{
+              left: `${column.x}px`
+            }}
+          >
+            {column.chars.map((char, index) => {
+              const charPosition = (index / column.chars.length) * 100;
+              const isInFlashZone = Math.abs(charPosition - flashPosition) < 5;
+              
+              return (
+                <div
+                  key={index}
+                  className={`matrix-char ${isInFlashZone ? 'flash-highlight' : ''}`}
+                >
+                  {char}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      
       {/* Background Eyes Videos - 3 on left, 4 on right */}
-      <div className="background-eyes">
+      <div 
+        className="background-eyes"
+        style={{
+          opacity: Math.max(0, 1 - (doorSize - 35) / 100),
+          transition: 'opacity 0.2s ease-out'
+        }}
+      >
         {/* LEFT SIDE - 3 Eyes */}
         {/* Upper Left - Extra Large */}
         <div className="eye-video-container eye-extra-large eye-upper-left">

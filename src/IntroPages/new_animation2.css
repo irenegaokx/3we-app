@@ -10,6 +10,63 @@
   position: relative;
 }
 
+/* Matrix Digital Rain Background */
+.matrix-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flash-sweep {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.matrix-column {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.matrix-char {
+  color: #00ff41;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.2;
+  text-shadow: 0 0 5px #00ff41;
+  opacity: 0.8;
+  transition: all 0.1s ease-out;
+  text-align: center;
+}
+
+.matrix-char.flash-highlight {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff, 0 0 20px #00ff41, 0 0 30px #ffffff;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 .flower-door-image {
   max-width: 35vw;
   max-height: 35vh;
