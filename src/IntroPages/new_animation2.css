@@ -1,0 +1,101 @@
+/* Clean slate for new_animation2 */
+
+.new-animation2-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Matrix Digital Rain Background */
+.matrix-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flash-sweep {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.matrix-column {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.matrix-char {
+  color: #00ff41;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.2;
+  text-shadow: 0 0 5px #00ff41;
+  opacity: 0.8;
+  transition: all 0.1s ease-out;
+  text-align: center;
+}
+
+.matrix-char.flash-highlight {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff, 0 0 20px #00ff41, 0 0 30px #ffffff;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Door and Coin Container */
+.door-coin-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.flower-door-image {
+  max-width: 35vw;
+  max-height: 35vh;
+  object-fit: contain;
+}
+
+.elite-coin-image {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  object-fit: contain;
+  z-index: 11;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.elite-coin-image:hover {
+  filter: brightness(1.3) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+}
+
+
+
+
