@@ -22,6 +22,7 @@ function NewAnimation() {
   const [zoomScale, setZoomScale] = useState(1);
   const [showBlackScreen, setShowBlackScreen] = useState(false);
   const [isCenterMoving, setIsCenterMoving] = useState(false);
+  const [isZooming, setIsZooming] = useState(false);
   
   const fullText = "The quest for peace and wisdom was fractured, scattered through waves of irony, absurdity, and noise, as the algorithm patterns it was trained to distort.\n\nA signal emerged out of this war for the psyche. And a network of seekers, united not by chance, but by a shared frequency and vision.\n\nA vision bound them those who search relentlessly, drawn toward the hidden architecture of truth.\n\nThey are known as the Elite Network";
 
@@ -69,7 +70,8 @@ function NewAnimation() {
     document.documentElement.style.setProperty('--text-shift', `${textShift}vw`);
     document.documentElement.style.setProperty('--zoom-scale', zoomScale);
     document.documentElement.style.setProperty('--is-center-moving', isCenterMoving ? '1' : '0');
-  }, [leftShift, rightShift, textShift, zoomScale, isCenterMoving]);
+    document.documentElement.style.setProperty('--is-zooming', isZooming ? '1' : '0');
+  }, [leftShift, rightShift, textShift, zoomScale, isCenterMoving, isZooming]);
 
   // Start typing after windows reach their position
   useEffect(() => {
@@ -143,7 +145,7 @@ function NewAnimation() {
             console.log('Setting center moving to false');
             setIsCenterMoving(false);
             setTimeout(() => {
-              // setIsZoomingIn(true);
+              setIsZooming(true);
               
               let zoomProgress = 0;
               const zoomDuration = 4000; // 4 seconds for smooth zoom

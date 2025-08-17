@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './new_animation2.css';
 import flowerDoorImage from '../assets/new_animation/flower_door.png';
-import eyesVideo from '../assets/new_animation/eyes_moving.mp4';
+import eliteCoinImage from '../assets/new_animation/elite_coin.png';
 
 function NewAnimation2() {
+  const navigate = useNavigate();
   const [doorSize, setDoorSize] = useState(35); // Default size in vw
   const [matrixColumns, setMatrixColumns] = useState([]);
   const [flashPosition, setFlashPosition] = useState(0);
+  const [coinFloat, setCoinFloat] = useState(0); // For coin floating animation
 
   // Matrix characters for the digital rain effect
   const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ハロエ木トルリコИX<>-=:^~';
+
+  const handleCoinClick = () => {
+    navigate('/main_entry');
+  };
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -76,6 +83,18 @@ function NewAnimation2() {
     return () => clearInterval(flashInterval);
   }, []);
 
+  // Coin floating animation
+  useEffect(() => {
+    const floatInterval = setInterval(() => {
+      setCoinFloat(prev => {
+        const newFloat = prev + 0.1;
+        return newFloat > Math.PI * 2 ? 0 : newFloat;
+      });
+    }, 50); // Update every 50ms for smooth animation
+
+    return () => clearInterval(floatInterval);
+  }, []);
+
   // Generate static Matrix columns
   const generateMatrixColumns = () => {
     const columns = [];
@@ -129,155 +148,33 @@ function NewAnimation2() {
           </div>
         ))}
       </div>
-      
-      {/* Background Eyes Videos - 3 on left, 4 on right */}
-      <div 
-        className="background-eyes"
-        style={{
-          opacity: Math.max(0, 1 - (doorSize - 35) / 100),
-          transition: 'opacity 0.2s ease-out'
-        }}
-      >
-        {/* LEFT SIDE - 3 Eyes */}
-        {/* Upper Left - Extra Large */}
-        <div className="eye-video-container eye-extra-large eye-upper-left">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 0;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
-        
-        {/* Upper Left - Medium */}
-        <div className="eye-video-container eye-medium eye-upper-left-2">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 1.5;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
 
-        {/* Middle Left - Large */}
-        <div className="eye-video-container eye-large eye-middle-left">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 0.8;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
-
-        {/* RIGHT SIDE - 4 Eyes */}
-        {/* Upper Right - Large */}
-        <div className="eye-video-container eye-large eye-upper-right">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 2.2;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
-
-        {/* Upper Right - Medium */}
-        <div className="eye-video-container eye-medium eye-upper-right-2">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 3.1;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
-
-        {/* Middle Right - Medium */}
-        <div className="eye-video-container eye-medium eye-middle-right">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 1.8;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
-
-        {/* Lower Right - Small */}
-        <div className="eye-video-container eye-small eye-lower-right">
-          <video 
-            className="eyes-video-background-instance"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            ref={(el) => {
-              if (el) {
-                el.currentTime = 2.7;
-              }
-            }}
-          >
-            <source src={eyesVideo} type="video/mp4" />
-          </video>
-        </div>
+      {/* Main Flower Door Image with Elite Coin */}
+      <div className="door-coin-container">
+        <img 
+          src={flowerDoorImage} 
+          alt="Flower Door with Coin" 
+          className="flower-door-image"
+          style={{
+            maxWidth: `${doorSize}vw`,
+            maxHeight: `${doorSize * 0.7}vh`,
+            transition: 'all 0.1s ease-out'
+          }}
+        />
+        <img 
+          src={eliteCoinImage} 
+          alt="Elite Coin" 
+          className="elite-coin-image"
+          style={{
+            width: `${doorSize * 0.07}vw`,
+            height: `${doorSize * 0.07}vw`,
+            transition: 'all 0.1s ease-out',
+            transform: `translate(-50%, -50%) translateY(${Math.sin(coinFloat) * 3}px)`,
+            filter: `brightness(${1 + Math.sin(coinFloat * 2) * 0.1})`
+          }}
+          onClick={handleCoinClick}
+        />
       </div>
-
-      {/* Main Flower Door Image */}
-      <img 
-        src={flowerDoorImage} 
-        alt="Flower Door with Coin" 
-        className="flower-door-image"
-        style={{
-          maxWidth: `${doorSize}vw`,
-          maxHeight: `${doorSize * 0.7}vh`,
-          transition: 'all 0.1s ease-out'
-        }}
-      />
     </div>
   );
 }

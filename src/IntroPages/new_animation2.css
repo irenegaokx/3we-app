@@ -67,121 +67,33 @@
   transform: scale(1.1);
 }
 
+/* Door and Coin Container */
+.door-coin-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
 .flower-door-image {
   max-width: 35vw;
   max-height: 35vh;
   object-fit: contain;
-  z-index: 10;
 }
 
-/* Background Eyes Container */
-.background-eyes {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Eye Video Container Base Styles */
-.eye-video-container {
+.elite-coin-image {
   position: absolute;
-  pointer-events: none;
-}
-
-.eyes-video-background-instance {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-/* Varying brightness for different eyes */
-.eye-upper-left .eyes-video-background-instance {
-  filter: brightness(1.0) contrast(1.2);
-}
-
-.eye-upper-left-2 .eyes-video-background-instance {
-  filter: brightness(0.8) contrast(1.1);
-}
-
-.eye-middle-left .eyes-video-background-instance {
-  filter: brightness(1.2) contrast(1.3);
-}
-
-.eye-upper-right .eyes-video-background-instance {
-  filter: brightness(0.7) contrast(1.0);
-}
-
-.eye-upper-right-2 .eyes-video-background-instance {
-  filter: brightness(1.3) contrast(1.2);
-}
-
-.eye-middle-right .eyes-video-background-instance {
-  filter: brightness(0.9) contrast(1.1);
-}
-
-.eye-lower-right .eyes-video-background-instance {
-  filter: brightness(1.5) contrast(1.2);
-}
-
-/* Different Eye Sizes */
-.eye-extra-large {
-  width: 240px;
-  height: 160px;
-}
-
-.eye-large {
-  width: 200px;
-  height: 130px;
-}
-
-.eye-medium {
-  width: 140px;
-  height: 100px;
-}
-
-.eye-small {
-  width: 100px;
-  height: 70px;
-}
-
-/* Eye Positions */
-.eye-upper-left {
-  top: 10%;
-  left: 20%;
-}
-
-.eye-upper-left-2 {
-  top: 50%;
-  left: 10%;
-}
-
-.eye-middle-left {
-  top: 80%;
-  left: 30%;
-}
-
-.eye-upper-right {
-  top: 8%;
-  right: 15%;
-}
-
-.eye-upper-right-2 {
   top: 35%;
-  right: 8%;
+  left: 50%;
+  object-fit: contain;
+  z-index: 11;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.eye-middle-right {
-  top: 60%;
-  right: 20%;
-}
-
-.eye-lower-right {
-  bottom: 15%;
-  right: 12%;
+.elite-coin-image:hover {
+  filter: brightness(1.3) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
 }
 
 
