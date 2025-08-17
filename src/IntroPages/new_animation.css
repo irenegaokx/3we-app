@@ -37,7 +37,7 @@ html, body {
   bottom: 0;
 }
 
-.eyes-video-instance {
+.eyes-video-strip-instance {
   height: 100%;
   width: 12.5vw;
   object-fit: cover;
@@ -53,8 +53,9 @@ html, body {
   left: calc(50% + var(--text-shift, 0vw));
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw;
-  max-width: 800px;
+  width: calc(100vw - (25vw + var(--left-window-shift, -30vw)) - (25vw + var(--right-window-shift, -30vw)) - 4vw);
+  max-width: calc(100vw - (25vw + var(--left-window-shift, -30vw)) - (25vw + var(--right-window-shift, -30vw)) - 4vw);
+  min-width: 200px;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -63,17 +64,17 @@ html, body {
 
 .typing-text {
   color: #fff;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
   text-align: center;
   text-shadow: 0 2px 8px #000, 0 0 2px #222;
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 8px;
   letter-spacing: 0.01em;
   box-sizing: border-box;
   user-select: none;
   white-space: pre-line;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .cursor {

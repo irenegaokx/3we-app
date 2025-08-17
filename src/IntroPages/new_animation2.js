@@ -142,7 +142,7 @@ function NewAnimation2() {
         {/* Upper Left - Extra Large */}
         <div className="eye-video-container eye-extra-large eye-upper-left">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 
@@ -160,7 +160,7 @@ function NewAnimation2() {
         {/* Upper Left - Medium */}
         <div className="eye-video-container eye-medium eye-upper-left-2">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 
@@ -178,7 +178,7 @@ function NewAnimation2() {
         {/* Middle Left - Large */}
         <div className="eye-video-container eye-large eye-middle-left">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 
@@ -197,7 +197,7 @@ function NewAnimation2() {
         {/* Upper Right - Large */}
         <div className="eye-video-container eye-large eye-upper-right">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 
@@ -215,7 +215,7 @@ function NewAnimation2() {
         {/* Upper Right - Medium */}
         <div className="eye-video-container eye-medium eye-upper-right-2">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 
@@ -233,7 +233,7 @@ function NewAnimation2() {
         {/* Middle Right - Medium */}
         <div className="eye-video-container eye-medium eye-middle-right">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 
@@ -251,7 +251,7 @@ function NewAnimation2() {
         {/* Lower Right - Small */}
         <div className="eye-video-container eye-small eye-lower-right">
           <video 
-            className="eyes-video-instance"
+            className="eyes-video-background-instance"
             autoPlay 
             loop 
             muted 

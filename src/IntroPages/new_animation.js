@@ -254,163 +254,34 @@ function NewAnimation() {
 
       {/* Eyes Video Strip at Top */}
       <div className="eyes-video-strip top">
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
+        {Array.from({ length: 12 }, (_, index) => (
+          <video 
+            key={`top-${index}`}
+            className="eyes-video-instance"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+          >
+            <source src={eyesVideo} type="video/mp4" />
+          </video>
+        ))}
       </div>
 
       {/* Eyes Video Strip at Bottom */}
       <div className="eyes-video-strip bottom">
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
-        <video 
-          className="eyes-video-instance"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        >
-          <source src={eyesVideo} type="video/mp4" />
-        </video>
+        {Array.from({ length: 12 }, (_, index) => (
+          <video 
+            key={`bottom-${index}`}
+            className="eyes-video-instance"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+          >
+            <source src={eyesVideo} type="video/mp4" />
+          </video>
+        ))}
       </div>
 
       {/* Left Window */}
